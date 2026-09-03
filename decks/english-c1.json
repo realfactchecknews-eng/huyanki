@@ -1,0 +1,794 @@
+{
+"name": "Английский B1+ → C1",
+"emoji": "🇬🇧",
+"both": true,
+"frontName": "WORD",
+"backName": "ПЕРЕВОД",
+"cards": [
+{
+"f": "abundant",
+"b": "обильный, изобилующий",
+"h": "abundant evidence / abundant resources"
+},
+{
+"f": "to acknowledge",
+"b": "признавать, подтверждать",
+"h": "acknowledge a mistake / acknowledge receipt"
+},
+{
+"f": "adverse",
+"b": "неблагоприятный, негативный",
+"h": "adverse effects / adverse weather"
+},
+{
+"f": "advocate",
+"b": "сторонник; отстаивать",
+"h": "a strong advocate of reform"
+},
+{
+"f": "to allege",
+"b": "утверждать (без доказательств)",
+"h": "he is alleged to have stolen it"
+},
+{
+"f": "ambiguous",
+"b": "двусмысленный, неоднозначный",
+"h": "an ambiguous answer"
+},
+{
+"f": "to anticipate",
+"b": "предвидеть, ожидать",
+"h": "we anticipate a rise in prices"
+},
+{
+"f": "arbitrary",
+"b": "произвольный, необоснованный",
+"h": "an arbitrary decision"
+},
+{
+"f": "to assert",
+"b": "утверждать, заявлять",
+"h": "assert one's rights"
+},
+{
+"f": "to attribute to",
+"b": "приписывать (чему-л.)",
+"h": "attribute the success to hard work"
+},
+{
+"f": "to bolster",
+"b": "поддержать, укрепить",
+"h": "bolster confidence in the economy"
+},
+{
+"f": "to circumvent",
+"b": "обходить (правило, преграду)",
+"h": "circumvent the rules"
+},
+{
+"f": "coherent",
+"b": "связный, логичный",
+"h": "a coherent argument"
+},
+{
+"f": "to compel",
+"b": "вынуждать, заставлять",
+"h": "compelled to resign"
+},
+{
+"f": "compelling",
+"b": "убедительный; захватывающий",
+"h": "a compelling argument / a compelling story"
+},
+{
+"f": "to comply with",
+"b": "соблюдать, выполнять",
+"h": "comply with the regulations"
+},
+{
+"f": "comprehensive",
+"b": "всесторонний, исчерпывающий",
+"h": "a comprehensive review"
+},
+{
+"f": "to concede",
+"b": "уступать; признавать",
+"h": "concede defeat"
+},
+{
+"f": "conducive to",
+"b": "способствующий",
+"h": "an atmosphere conducive to learning"
+},
+{
+"f": "to confer",
+"b": "предоставлять (право); совещаться",
+"h": "confer a right on smb"
+},
+{
+"f": "to consolidate",
+"b": "укреплять; объединять",
+"h": "consolidate one's position"
+},
+{
+"f": "conspicuous",
+"b": "заметный, бросающийся в глаза",
+"h": "conspicuous consumption"
+},
+{
+"f": "to constitute",
+"b": "составлять, являться",
+"h": "this constitutes a breach of contract"
+},
+{
+"f": "contentious",
+"b": "спорный, вызывающий разногласия",
+"h": "a contentious issue"
+},
+{
+"f": "to contradict",
+"b": "противоречить, опровергать",
+"h": "the results contradict the theory"
+},
+{
+"f": "to curb",
+"b": "обуздать, ограничить",
+"h": "curb inflation"
+},
+{
+"f": "to deem",
+"b": "считать, полагать",
+"h": "deemed unacceptable"
+},
+{
+"f": "to deteriorate",
+"b": "ухудшаться",
+"h": "his health deteriorated rapidly"
+},
+{
+"f": "detrimental",
+"b": "вредный, пагубный",
+"h": "detrimental to health"
+},
+{
+"f": "to devise",
+"b": "разрабатывать, придумывать",
+"h": "devise a new strategy"
+},
+{
+"f": "discrepancy",
+"b": "расхождение, несоответствие",
+"h": "a discrepancy between the figures"
+},
+{
+"f": "to discern",
+"b": "различать, распознавать",
+"h": "discern a pattern"
+},
+{
+"f": "to disclose",
+"b": "раскрывать, разглашать",
+"h": "disclose confidential information"
+},
+{
+"f": "disparity",
+"b": "неравенство, разрыв",
+"h": "income disparity"
+},
+{
+"f": "to dismiss",
+"b": "отвергать; увольнять",
+"h": "dismiss the idea as unrealistic"
+},
+{
+"f": "to elicit",
+"b": "вызывать, добиваться (ответа)",
+"h": "elicit a response"
+},
+{
+"f": "to embark on",
+"b": "приступать, браться за",
+"h": "embark on a career"
+},
+{
+"f": "to encompass",
+"b": "охватывать, включать",
+"h": "the study encompasses three areas"
+},
+{
+"f": "to endorse",
+"b": "одобрять, поддерживать",
+"h": "endorse a candidate"
+},
+{
+"f": "to entail",
+"b": "влечь за собой, подразумевать",
+"h": "the job entails a lot of travel"
+},
+{
+"f": "to erode",
+"b": "подрывать, размывать",
+"h": "erode public trust"
+},
+{
+"f": "to exacerbate",
+"b": "усугублять, обострять",
+"h": "exacerbate the crisis"
+},
+{
+"f": "exempt from",
+"b": "освобождённый (от обязанности)",
+"h": "exempt from tax"
+},
+{
+"f": "to exert",
+"b": "оказывать (влияние, давление)",
+"h": "exert pressure on smb"
+},
+{
+"f": "feasible",
+"b": "осуществимый, выполнимый",
+"h": "a feasible plan"
+},
+{
+"f": "to foster",
+"b": "способствовать, воспитывать",
+"h": "foster cooperation"
+},
+{
+"f": "fluctuate",
+"b": "колебаться (о цифрах)",
+"h": "prices fluctuate wildly"
+},
+{
+"f": "to hamper",
+"b": "мешать, затруднять",
+"h": "hampered by bad weather"
+},
+{
+"f": "to hinder",
+"b": "препятствовать",
+"h": "hinder progress"
+},
+{
+"f": "imperative",
+"b": "крайне необходимый; императив",
+"h": "it is imperative that we act"
+},
+{
+"f": "to impede",
+"b": "препятствовать, тормозить",
+"h": "impede the investigation"
+},
+{
+"f": "to implement",
+"b": "внедрять, осуществлять",
+"h": "implement a policy"
+},
+{
+"f": "implicit",
+"b": "подразумеваемый, неявный",
+"h": "an implicit assumption"
+},
+{
+"f": "inadvertently",
+"b": "непреднамеренно, по неосторожности",
+"h": "inadvertently deleted the file"
+},
+{
+"f": "to incur",
+"b": "навлекать, нести (расходы)",
+"h": "incur costs / incur a penalty"
+},
+{
+"f": "indispensable",
+"b": "незаменимый",
+"h": "an indispensable tool"
+},
+{
+"f": "inevitable",
+"b": "неизбежный",
+"h": "an inevitable consequence"
+},
+{
+"f": "inherent",
+"b": "присущий, неотъемлемый",
+"h": "risks inherent in the process"
+},
+{
+"f": "to inhibit",
+"b": "сдерживать, подавлять",
+"h": "inhibit growth"
+},
+{
+"f": "integral",
+"b": "неотъемлемый, составной",
+"h": "an integral part of the system"
+},
+{
+"f": "intricate",
+"b": "замысловатый, запутанный",
+"h": "an intricate network"
+},
+{
+"f": "to jeopardise",
+"b": "ставить под угрозу",
+"h": "jeopardise the deal"
+},
+{
+"f": "lucrative",
+"b": "прибыльный, выгодный",
+"h": "a lucrative contract"
+},
+{
+"f": "meticulous",
+"b": "дотошный, скрупулёзный",
+"h": "meticulous attention to detail"
+},
+{
+"f": "to mitigate",
+"b": "смягчать, уменьшать",
+"h": "mitigate the damage"
+},
+{
+"f": "negligible",
+"b": "ничтожный, незначительный",
+"h": "a negligible effect"
+},
+{
+"f": "notion",
+"b": "понятие, представление",
+"h": "reject the notion that..."
+},
+{
+"f": "to nurture",
+"b": "взращивать, воспитывать",
+"h": "nurture talent"
+},
+{
+"f": "to overhaul",
+"b": "капитально реформировать",
+"h": "overhaul the tax system"
+},
+{
+"f": "to outweigh",
+"b": "перевешивать (по значимости)",
+"h": "the benefits outweigh the risks"
+},
+{
+"f": "paramount",
+"b": "первостепенный",
+"h": "safety is paramount"
+},
+{
+"f": "to perpetuate",
+"b": "увековечивать, закреплять",
+"h": "perpetuate a stereotype"
+},
+{
+"f": "pertinent",
+"b": "уместный, относящийся к делу",
+"h": "a pertinent question"
+},
+{
+"f": "plausible",
+"b": "правдоподобный",
+"h": "a plausible explanation"
+},
+{
+"f": "to precede",
+"b": "предшествовать",
+"h": "the storm was preceded by silence"
+},
+{
+"f": "predominantly",
+"b": "преимущественно",
+"h": "a predominantly rural area"
+},
+{
+"f": "to preclude",
+"b": "исключать, делать невозможным",
+"h": "this does not preclude other options"
+},
+{
+"f": "prevalent",
+"b": "распространённый, преобладающий",
+"h": "a prevalent belief"
+},
+{
+"f": "profound",
+"b": "глубокий (о влиянии)",
+"h": "a profound impact"
+},
+{
+"f": "prone to",
+"b": "склонный к",
+"h": "prone to error"
+},
+{
+"f": "to prompt",
+"b": "побуждать, вызывать",
+"h": "the news prompted a sell-off"
+},
+{
+"f": "to reconcile",
+"b": "примирять, согласовывать",
+"h": "reconcile two viewpoints"
+},
+{
+"f": "redundant",
+"b": "излишний; сокращённый (о работнике)",
+"h": "made redundant"
+},
+{
+"f": "to refute",
+"b": "опровергать",
+"h": "refute an argument"
+},
+{
+"f": "to reinforce",
+"b": "усиливать, подкреплять",
+"h": "reinforce a stereotype"
+},
+{
+"f": "to relinquish",
+"b": "отказываться, уступать (право)",
+"h": "relinquish control"
+},
+{
+"f": "to render",
+"b": "делать (каким-л.); оказывать",
+"h": "render the law obsolete"
+},
+{
+"f": "to reiterate",
+"b": "повторять (сказанное)",
+"h": "reiterate the demand"
+},
+{
+"f": "resilient",
+"b": "устойчивый, жизнестойкий",
+"h": "a resilient economy"
+},
+{
+"f": "to resort to",
+"b": "прибегать к",
+"h": "resort to violence"
+},
+{
+"f": "robust",
+"b": "крепкий, надёжный",
+"h": "robust growth / a robust system"
+},
+{
+"f": "scarce",
+"b": "скудный, дефицитный",
+"h": "water is scarce here"
+},
+{
+"f": "to scrutinise",
+"b": "тщательно изучать",
+"h": "scrutinise the accounts"
+},
+{
+"f": "to stem from",
+"b": "проистекать из",
+"h": "the problem stems from neglect"
+},
+{
+"f": "stringent",
+"b": "строгий, жёсткий (о правилах)",
+"h": "stringent requirements"
+},
+{
+"f": "subsequent",
+"b": "последующий",
+"h": "in subsequent years"
+},
+{
+"f": "subtle",
+"b": "тонкий, едва уловимый",
+"h": "a subtle difference"
+},
+{
+"f": "to substantiate",
+"b": "обосновывать, подтверждать",
+"h": "substantiate a claim"
+},
+{
+"f": "sustainable",
+"b": "устойчивый, экологичный",
+"h": "sustainable development"
+},
+{
+"f": "tangible",
+"b": "осязаемый, ощутимый",
+"h": "tangible benefits"
+},
+{
+"f": "tentative",
+"b": "предварительный; неуверенный",
+"h": "a tentative agreement"
+},
+{
+"f": "thorough",
+"b": "тщательный, основательный",
+"h": "a thorough investigation"
+},
+{
+"f": "to thrive",
+"b": "процветать, преуспевать",
+"h": "small firms thrive here"
+},
+{
+"f": "to undermine",
+"b": "подрывать, ослаблять",
+"h": "undermine confidence"
+},
+{
+"f": "to undertake",
+"b": "предпринимать, брать на себя",
+"h": "undertake research"
+},
+{
+"f": "unprecedented",
+"b": "беспрецедентный",
+"h": "an unprecedented crisis"
+},
+{
+"f": "to uphold",
+"b": "поддерживать, оставлять в силе",
+"h": "uphold the ruling"
+},
+{
+"f": "viable",
+"b": "жизнеспособный, реальный",
+"h": "a viable alternative"
+},
+{
+"f": "vulnerable",
+"b": "уязвимый",
+"h": "vulnerable to attack"
+},
+{
+"f": "to waive",
+"b": "отказываться (от права)",
+"h": "waive the fee"
+},
+{
+"f": "widespread",
+"b": "широко распространённый",
+"h": "widespread support"
+},
+{
+"f": "to yield",
+"b": "давать (результат); уступать",
+"h": "yield results"
+},
+{
+"f": "ubiquitous",
+"b": "вездесущий, повсеместный",
+"h": "smartphones are ubiquitous"
+},
+{
+"f": "to alleviate",
+"b": "облегчать (боль, проблему)",
+"h": "alleviate poverty"
+},
+{
+"f": "to attain",
+"b": "достигать",
+"h": "attain a goal"
+},
+{
+"f": "candid",
+"b": "искренний, откровенный",
+"h": "a candid interview"
+},
+{
+"f": "to cease",
+"b": "прекращать(ся)",
+"h": "cease operations"
+},
+{
+"f": "to compensate for",
+"b": "компенсировать",
+"h": "compensate for the loss"
+},
+{
+"f": "to comprise",
+"b": "состоять из, включать",
+"h": "the team comprises five people"
+},
+{
+"f": "to conform to",
+"b": "соответствовать (нормам)",
+"h": "conform to standards"
+},
+{
+"f": "crucial",
+"b": "решающий, критически важный",
+"h": "a crucial role"
+},
+{
+"f": "to cultivate",
+"b": "развивать, культивировать",
+"h": "cultivate relationships"
+},
+{
+"f": "to deprive of",
+"b": "лишать (чего-л.)",
+"h": "deprived of sleep"
+},
+{
+"f": "to diminish",
+"b": "уменьшать(ся)",
+"h": "diminishing returns"
+},
+{
+"f": "to disperse",
+"b": "рассеивать(ся), разгонять",
+"h": "the crowd dispersed"
+},
+{
+"f": "distinct",
+"b": "отчётливый; отдельный",
+"h": "a distinct advantage"
+},
+{
+"f": "to eliminate",
+"b": "устранять, ликвидировать",
+"h": "eliminate the risk"
+},
+{
+"f": "to emerge",
+"b": "появляться, выясняться",
+"h": "it emerged that..."
+},
+{
+"f": "to enhance",
+"b": "улучшать, повышать",
+"h": "enhance the quality"
+},
+{
+"f": "to ensure",
+"b": "обеспечивать, гарантировать",
+"h": "ensure compliance"
+},
+{
+"f": "explicit",
+"b": "явный, недвусмысленный",
+"h": "explicit instructions"
+},
+{
+"f": "to facilitate",
+"b": "облегчать, содействовать",
+"h": "facilitate the process"
+},
+{
+"f": "to highlight",
+"b": "подчёркивать, выделять",
+"h": "highlight the need for reform"
+},
+{
+"f": "to illustrate",
+"b": "иллюстрировать, показывать",
+"h": "this illustrates the point"
+},
+{
+"f": "to impose",
+"b": "навязывать, вводить (налог)",
+"h": "impose sanctions"
+},
+{
+"f": "to incorporate",
+"b": "включать, объединять",
+"h": "incorporate feedback"
+},
+{
+"f": "to justify",
+"b": "оправдывать, обосновывать",
+"h": "justify the cost"
+},
+{
+"f": "to modify",
+"b": "изменять, корректировать",
+"h": "modify the design"
+},
+{
+"f": "to neglect",
+"b": "пренебрегать, запускать",
+"h": "neglect one's duties"
+},
+{
+"f": "to obtain",
+"b": "получать, добывать",
+"h": "obtain permission"
+},
+{
+"f": "to pose",
+"b": "представлять (угрозу); ставить (вопрос)",
+"h": "pose a threat"
+},
+{
+"f": "to pursue",
+"b": "преследовать (цель), заниматься",
+"h": "pursue a career"
+},
+{
+"f": "to reveal",
+"b": "выявлять, раскрывать",
+"h": "the study revealed that..."
+},
+{
+"f": "significant",
+"b": "значительный, существенный",
+"h": "a significant increase"
+},
+{
+"f": "to speculate",
+"b": "предполагать; спекулировать",
+"h": "speculate about the causes"
+},
+{
+"f": "to strive for",
+"b": "стремиться к",
+"h": "strive for excellence"
+},
+{
+"f": "to tackle",
+"b": "браться за (проблему)",
+"h": "tackle climate change"
+},
+{
+"f": "to trigger",
+"b": "запускать, провоцировать",
+"h": "trigger a reaction"
+},
+{
+"f": "to verify",
+"b": "проверять, подтверждать",
+"h": "verify the data"
+},
+{
+"f": "to weigh up",
+"b": "взвешивать (за и против)",
+"h": "weigh up the options"
+},
+{
+"f": "albeit",
+"b": "хотя и",
+"h": "a good result, albeit a slow one"
+},
+{
+"f": "nonetheless",
+"b": "тем не менее",
+"h": "nonetheless, the risk remains"
+},
+{
+"f": "notwithstanding",
+"b": "несмотря на",
+"h": "notwithstanding the delay"
+},
+{
+"f": "to that end",
+"b": "с этой целью",
+"h": "to that end, we hired a consultant"
+},
+{
+"f": "by and large",
+"b": "в целом, в общем",
+"h": "by and large it works"
+},
+{
+"f": "in the wake of",
+"b": "вслед за, после",
+"h": "in the wake of the scandal"
+},
+{
+"f": "at odds with",
+"b": "в противоречии с",
+"h": "at odds with the evidence"
+}
+]
+}

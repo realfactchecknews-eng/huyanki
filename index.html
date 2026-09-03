@@ -118,6 +118,7 @@ th{color:var(--dim);font-size:11px;text-transform:uppercase;letter-spacing:1px}
   <header>
     <div class="logo" onclick="go()">ХУЯНКИ<span>SPACED REPETITION</span></div>
     <div class="spacer"></div>
+    <button class="icnbtn" title="Библиотека готовых колод" onclick="libModal()">&#128218;</button>
     <button class="icnbtn" title="Статистика и настройки" onclick="statsModal()">&#128202;</button>
     <button class="icnbtn" title="Бэкап" onclick="backupModal()">&#128190;</button>
   </header>
@@ -400,6 +401,34 @@ function saveCfg(){
   S.cfg.newPerDay=Math.max(0,+v('np')||15);
   S.cfg.retention=Math.min(.97,Math.max(.8,+v('rt')||.9));
   save();closeM();render();
+}
+/* ================= БИБЛИОТЕКА ГОТОВЫХ КОЛОД ================= */
+function libModal(){
+  open$('<h2>Библиотека</h2><p class="h">Загрузка…</p>');
+  fetch('decks/index.json').then(function(r){return r.json()}).then(function(list){
+    open$('<h2>Библиотека</h2><p class="h">Готовые колоды. Повторная загрузка добавляет только новые карточки — прогресс не теряется.</p>'+
+      list.map(function(x){
+        var have=S.decks.filter(function(d){return d.name===x.name})[0];
+        return '<div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)">'+
+          '<div style="font-size:26px">'+x.emoji+'</div><div style="flex:1">'+
+          '<div style="font-weight:700;font-size:14px">'+esc(x.name)+'</div>'+
+          '<div style="font-size:12px;color:var(--dim)">'+x.n+' карточек'+(have?' &middot; уже добавлена ('+have.cards.length+')':'')+'</div></div>'+
+          '<button class="btn'+(have?' gh':'')+'" style="padding:9px 14px" onclick="addLib(\''+x.file+'\')">'+(have?'Обновить':'Добавить')+'</button></div>';
+      }).join(''));
+  }).catch(function(){open$('<h2>Библиотека</h2><p class="h">Не удалось загрузить (нужен запуск с сайта, а не из файла).</p>')});
+}
+function addLib(file){
+  fetch('decks/'+file).then(function(r){return r.json()}).then(function(pack){
+    var d=S.decks.filter(function(x){return x.name===pack.name})[0];
+    if(!d){d={id:uid(),name:pack.name,emoji:pack.emoji,both:pack.both,frontName:pack.frontName,backName:pack.backName,cards:[]};S.decks.push(d)}
+    var have={}; d.cards.forEach(function(c){have[c.f+'|'+c.b]=1});
+    var added=0;
+    pack.cards.forEach(function(c){
+      if(have[c.f+'|'+c.b])return;
+      d.cards.push({id:uid(),f:c.f,b:c.b,h:c.h||''}); added++;
+    });
+    save();closeM();render();toast(added?('Добавлено карточек: '+added):'Новых карточек нет');
+  });
 }
 function backupModal(){
   open$('<h2>Бэкап</h2><p class="h">Прогресс лежит в этом браузере. Файл — чтобы перенести на другое устройство.</p>'+
