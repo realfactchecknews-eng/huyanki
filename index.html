@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ХУЯНКИ — умные карточки</title>
+<style>
+:root{
+  --bg:#0a0a0f; --bg2:#12121c; --panel:rgba(255,255,255,.045); --line:rgba(255,255,255,.09);
+  --tx:#f2f2f7; --dim:#8b8b9e; --acc:#7c5cff; --acc2:#c04cff; --ok:#25d07a; --warn:#ffb020; --bad:#ff4d6d;
+  --r:20px; --f:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{margin:0;font-family:var(--f);background:var(--bg);color:var(--tx);overflow-x:hidden;
+  background-image:radial-gradient(900px 600px at 15% -10%,rgba(124,92,255,.20),transparent 60%),
+                   radial-gradient(800px 500px at 90% 0%,rgba(192,76,255,.13),transparent 60%),
+                   radial-gradient(700px 700px at 50% 110%,rgba(37,208,122,.07),transparent 60%);
+  background-attachment:fixed}
+::selection{background:var(--acc);color:#fff}
+button,input,textarea,select{font-family:inherit;font-size:inherit;color:inherit}
+.wrap{max-width:960px;margin:0 auto;padding:18px 18px 120px}
+header{display:flex;align-items:center;gap:12px;padding:6px 2px 22px}
+.logo{font-weight:900;font-size:26px;letter-spacing:-1.2px;background:linear-gradient(100deg,#fff,var(--acc) 55%,var(--acc2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;cursor:pointer}
+.logo span{font-size:11px;font-weight:700;color:var(--dim);-webkit-text-fill-color:var(--dim);letter-spacing:2px;display:block;margin-top:-4px}
+.spacer{flex:1}
+.icnbtn{background:var(--panel);border:1px solid var(--line);width:40px;height:40px;border-radius:13px;display:grid;place-items:center;
+  cursor:pointer;transition:.2s;font-size:17px}
+.icnbtn:hover{background:rgba(255,255,255,.1);transform:translateY(-2px)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+.stat{padding:14px 12px;text-align:center;border-radius:16px;background:var(--panel);border:1px solid var(--line);animation:up .5s both}
+.stat b{display:block;font-size:22px;font-weight:800;letter-spacing:-1px}
+.stat i{font-style:normal;font-size:10.5px;color:var(--dim);text-transform:uppercase;letter-spacing:1px}
+.decks{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.deck{padding:18px;border-radius:var(--r);background:var(--panel);border:1px solid var(--line);cursor:pointer;position:relative;
+  overflow:hidden;transition:transform .25s cubic-bezier(.2,.8,.3,1),border-color .25s;animation:up .5s both}
+.deck:hover{transform:translateY(-4px);border-color:rgba(124,92,255,.55)}
+.deck::after{content:'';position:absolute;inset:auto -30% -60% -30%;height:120px;background:radial-gradient(closest-side,rgba(124,92,255,.35),transparent);
+  opacity:0;transition:.35s;pointer-events:none}
+.deck:hover::after{opacity:1}
+.deck .em{font-size:30px}
+.deck h3{margin:8px 0 4px;font-size:17px;font-weight:700;letter-spacing:-.3px}
+.deck p{margin:0;font-size:12.5px;color:var(--dim)}
+.pills{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+.pill{font-size:11px;font-weight:700;padding:4px 9px;border-radius:20px;background:rgba(255,255,255,.07)}
+.pill.n{background:rgba(124,92,255,.2);color:#b9a5ff}
+.pill.d{background:rgba(37,208,122,.16);color:#68e8a9}
+.bar{height:4px;border-radius:4px;background:rgba(255,255,255,.08);margin-top:12px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--acc),var(--acc2));transition:width .6s cubic-bezier(.2,.8,.3,1)}
+.add{display:grid;place-items:center;min-height:150px;border:1.5px dashed var(--line);color:var(--dim);font-size:14px;font-weight:600;
+  border-radius:var(--r);cursor:pointer;transition:.2s}
+.add:hover{border-color:var(--acc);color:var(--tx);background:rgba(124,92,255,.06)}
+#study{display:none;position:fixed;inset:0;background:var(--bg);z-index:40;flex-direction:column;
+  background-image:radial-gradient(900px 600px at 20% -10%,rgba(124,92,255,.18),transparent 60%),radial-gradient(700px 500px at 85% 105%,rgba(192,76,255,.12),transparent 60%)}
+#study.on{display:flex;animation:fade .3s}
+.top{display:flex;align-items:center;gap:12px;padding:16px 18px;max-width:820px;margin:0 auto;width:100%}
+.prog{flex:1;height:6px;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acc),var(--acc2));transition:width .5s}
+.cnt{font-size:12px;color:var(--dim);font-variant-numeric:tabular-nums;font-weight:600}
+.stage{flex:1;display:grid;place-items:center;padding:10px 18px;perspective:1600px}
+.card{width:100%;max-width:640px;min-height:min(48vh,380px);position:relative;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,0,.2,1);cursor:pointer}
+.card.flip{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:26px;padding:34px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;
+  background:linear-gradient(160deg,rgba(255,255,255,.075),rgba(255,255,255,.03));border:1px solid var(--line);
+  box-shadow:0 30px 70px -30px rgba(0,0,0,.9)}
+.face.b{transform:rotateY(180deg);background:linear-gradient(160deg,rgba(124,92,255,.16),rgba(192,76,255,.07))}
+.face .tag{font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);font-weight:700}
+.face .txt{font-size:clamp(22px,4.6vw,36px);font-weight:750;letter-spacing:-.8px;line-height:1.25}
+.face .sub{font-size:14.5px;color:var(--dim);max-width:44ch;line-height:1.5}
+.tip{text-align:center;font-size:12px;color:var(--dim);padding:6px;min-height:22px}
+.grades{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;max-width:640px;margin:0 auto;width:100%;padding:0 18px 28px;transition:.3s}
+.grades.hide{opacity:0;pointer-events:none;transform:translateY(12px)}
+.g{padding:13px 6px;border-radius:16px;border:1px solid var(--line);background:var(--panel);cursor:pointer;transition:.18s;text-align:center}
+.g:hover{transform:translateY(-3px)}
+.g b{display:block;font-size:14px;font-weight:750}
+.g i{font-style:normal;font-size:10.5px;color:var(--dim);display:block;margin-top:3px;font-variant-numeric:tabular-nums}
+.g1{border-color:rgba(255,77,109,.4)}.g1:hover{background:rgba(255,77,109,.14)}
+.g2{border-color:rgba(255,176,32,.35)}.g2:hover{background:rgba(255,176,32,.13)}
+.g3{border-color:rgba(37,208,122,.4)}.g3:hover{background:rgba(37,208,122,.13)}
+.g4{border-color:rgba(124,92,255,.45)}.g4:hover{background:rgba(124,92,255,.16)}
+.showbtn{max-width:640px;margin:0 auto 28px;width:calc(100% - 36px);padding:16px;border-radius:16px;border:none;cursor:pointer;
+  font-weight:750;font-size:15px;color:#fff;background:linear-gradient(100deg,var(--acc),var(--acc2));box-shadow:0 14px 34px -12px rgba(124,92,255,.8);transition:.2s;display:block}
+.showbtn:hover{transform:translateY(-2px)}
+.done{text-align:center;padding:40px 20px;animation:up .5s}
+.done .em{font-size:60px;animation:pop .6s}
+.modal{position:fixed;inset:0;background:rgba(5,5,10,.7);backdrop-filter:blur(8px);z-index:60;display:none;place-items:center;padding:18px}
+.modal.on{display:grid;animation:fade .25s}
+.sheet{width:100%;max-width:600px;max-height:88vh;overflow:auto;background:var(--bg2);border:1px solid var(--line);border-radius:24px;padding:24px;animation:up .35s}
+.sheet h2{margin:0 0 4px;font-size:21px;letter-spacing:-.5px}
+.sheet p.h{margin:0 0 18px;color:var(--dim);font-size:13px}
+label{display:block;font-size:12px;color:var(--dim);margin:14px 0 6px;font-weight:600}
+input,textarea,select{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:13px;padding:12px 14px;outline:none;transition:.2s}
+input:focus,textarea:focus{border-color:var(--acc);background:rgba(124,92,255,.07)}
+textarea{min-height:190px;resize:vertical;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;line-height:1.6}
+.btn{padding:13px 20px;border-radius:14px;border:none;cursor:pointer;font-weight:700;font-size:14px;
+  background:linear-gradient(100deg,var(--acc),var(--acc2));color:#fff;transition:.2s}
+.btn:hover{transform:translateY(-2px)}
+.btn.gh{background:var(--panel);border:1px solid var(--line)}
+.row{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.chk{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--tx);margin-top:12px;cursor:pointer}
+.chk input{width:auto}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:16px}
+td,th{padding:9px 8px;border-bottom:1px solid var(--line);text-align:left}
+th{color:var(--dim);font-size:11px;text-transform:uppercase;letter-spacing:1px}
+.heat{display:grid;grid-template-columns:repeat(auto-fill,14px);gap:4px;margin-top:14px}
+.hc{width:14px;height:14px;border-radius:4px}
+@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes pop{0%{transform:scale(.4)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
+@media(max-width:560px){.stats{grid-template-columns:repeat(2,1fr)}.grades{grid-template-columns:repeat(2,1fr)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap" id="home">
+  <header>
+    <div class="logo" onclick="go()">ХУЯНКИ<span>SPACED REPETITION</span></div>
+    <div class="spacer"></div>
+    <button class="icnbtn" title="Статистика и настройки" onclick="statsModal()">&#128202;</button>
+    <button class="icnbtn" title="Бэкап" onclick="backupModal()">&#128190;</button>
+  </header>
+  <div class="stats" id="hs"></div>
+  <div class="decks" id="dl"></div>
+</div>
+
+<div id="study">
+  <div class="top">
+    <button class="icnbtn" onclick="endSession()">&times;</button>
+    <div class="prog"><i id="pg"></i></div>
+    <div class="cnt" id="cnt"></div>
+  </div>
+  <div class="stage" id="stage"></div>
+  <div class="tip" id="tip"></div>
+  <button class="showbtn" id="show" onclick="reveal()">Показать ответ &nbsp;&middot;&nbsp; Space</button>
+  <div class="grades hide" id="gr">
+    <div class="g g1" onclick="rate(1)"><b>Забыл</b><i id="i1"></i></div>
+    <div class="g g2" onclick="rate(2)"><b>Трудно</b><i id="i2"></i></div>
+    <div class="g g3" onclick="rate(3)"><b>Норм</b><i id="i3"></i></div>
+    <div class="g g4" onclick="rate(4)"><b>Легко</b><i id="i4"></i></div>
+  </div>
+</div>
+
+<div class="modal" id="modal" onclick="if(event.target===this)closeM()"><div class="sheet" id="sheet"></div></div>
+
+<script>
+/* ================= ХРАНИЛИЩЕ ================= */
+var K='huyanki.v1';
+var DEF={decks:[],sched:{},log:[],cfg:{newPerDay:15,maxPerDay:120,retention:0.9}};
+var S=load();
+function load(){try{var o=JSON.parse(localStorage.getItem(K));return o?Object.assign(JSON.parse(JSON.stringify(DEF)),o):JSON.parse(JSON.stringify(DEF))}catch(e){return JSON.parse(JSON.stringify(DEF))}}
+function save(){localStorage.setItem(K,JSON.stringify(S))}
+function uid(){return Math.random().toString(36).slice(2,10)}
+var DAY=864e5;
+function today(){return Math.floor(Date.now()/DAY)}
+
+/* ================= FSRS-4.5 =================
+   Модель памяти из исследований (Ye et al. 2023): у каждого следа памяти есть
+   стабильность S (через сколько дней вспомним с вероятностью 90%), сложность D
+   и извлекаемость R (кривая забывания Эббингауза). Интервал подбирается так,
+   чтобы карточка пришла ровно на грани забывания — там повтор даёт максимум
+   (эффект интервального повторения + retrieval practice, Roediger & Karpicke). */
+var W=[0.4872,1.4003,3.7145,13.8206,5.1618,1.2298,0.8975,0.0310,1.6474,0.1367,1.0461,2.1072,0.0793,0.3246,1.5870,0.2272,2.8755];
+var FF=19/81, CC=-0.5;
+function clampD(d){return Math.min(10,Math.max(1,d))}
+function retr(t,s){return Math.pow(1+FF*t/s,CC)}
+function ivl(s){return Math.max(1,Math.round(s/FF*(Math.pow(S.cfg.retention,1/CC)-1)))}
+function initM(g){return{s:W[g-1],d:clampD(W[4]-Math.exp(W[5]*(g-1))+1)}}
+function nextM(c,g,t){
+  var r=retr(t,c.s), d=clampD(c.d-W[6]*(g-3));
+  d=clampD(W[7]*(W[4]-Math.exp(W[5]*3)+1)+(1-W[7])*d);           // возврат к среднему
+  var s;
+  if(g===1) s=Math.min(c.s,W[11]*Math.pow(c.d,-W[12])*(Math.pow(c.s+1,W[13])-1)*Math.exp(W[14]*(1-r)));
+  else s=c.s*(1+Math.exp(W[8])*(11-c.d)*Math.pow(c.s,-W[9])*(Math.exp(W[10]*(1-r))-1)*(g===2?W[15]:1)*(g===4?W[16]:1));
+  return{s:Math.max(.1,s),d:d};
+}
+/* ключ = карточка + направление: обе стороны — разные следы памяти, свои интервалы */
+function key(cid,dir){return cid+':'+dir}
+function st(cid,dir){return S.sched[key(cid,dir)]}
+function preview(cid,dir,g){
+  var c=st(cid,dir);
+  if(!c||!c.reps) return ivl(initM(g).s);
+  return ivl(nextM(c,g,Math.max(0,today()-c.last)).s);
+}
+function fmt(d){return d<30?d+' д':d<365?Math.round(d/30)+' мес':(d/365).toFixed(1)+' г'}
+
+/* ================= ОЧЕРЕДЬ =================
+   1) просрочка вперёд — забытое дороже нового;
+   2) interleaving: перемешиваем темы и направления (лучше блочной зубрёжки, Rohrer & Taylor);
+   3) лимит новых в день — иначе завтра лавина повторов. */
+function dirs(d){return d.both?[0,1]:[0]}
+function queue(deck){
+  var t=today(), due=[], nw=[];
+  deck.cards.forEach(function(c){dirs(deck).forEach(function(dir){
+    var s=st(c.id,dir);
+    if(!s||!s.reps) nw.push({c:c,dir:dir,ov:-1});
+    else if(s.due<=t) due.push({c:c,dir:dir,ov:t-s.due,s:s});
+  })});
+  due.sort(function(a,b){return (b.ov-a.ov)||(a.s.s-b.s.s)});
+  shuffle(nw);
+  var doneNew=S.log.filter(function(l){return l.t===t&&l.n}).length;
+  var q=due.slice(0,S.cfg.maxPerDay).concat(nw.slice(0,Math.max(0,S.cfg.newPerDay-doneNew)));
+  return interleave(q);
+}
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.random()*(i+1)|0;var x=a[i];a[i]=a[j];a[j]=x}}
+function interleave(q){
+  shuffle(q);
+  var out=[];
+  while(q.length){
+    var i=0;
+    for(var k=0;k<q.length;k++){ if(!out.length||out[out.length-1].c.id!==q[k].c.id){i=k;break} }
+    out.push(q.splice(i,1)[0]);
+  }
+  // сильно просроченные — ближе к началу, но не одним блоком
+  return out.sort(function(a,b){return (b.ov>7?1:0)-(a.ov>7?1:0)});
+}
+function counts(deck){
+  var t=today(), n=0, d=0;
+  deck.cards.forEach(function(c){dirs(deck).forEach(function(dir){
+    var s=st(c.id,dir);
+    if(!s||!s.reps)n++; else if(s.due<=t)d++;
+  })});
+  var doneNew=S.log.filter(function(l){return l.t===t&&l.n}).length;
+  return{n:Math.min(n,Math.max(0,S.cfg.newPerDay-doneNew)),d:d};
+}
+
+/* ================= СЕССИЯ ================= */
+var Q=[],cur=null,deck=null,total=0,shown=false,again=[];
+var CARD_HTML='<div class="card" id="card" onclick="reveal()">'+
+ '<div class="face f"><div class="tag" id="ftag"></div><div class="txt" id="fq"></div><div class="sub" id="fh"></div></div>'+
+ '<div class="face b"><div class="tag">ОТВЕТ</div><div class="txt" id="ba"></div><div class="sub" id="bs"></div></div></div>';
+function study(id){
+  deck=S.decks.filter(function(d){return d.id===id})[0];
+  Q=queue(deck);
+  if(!Q.length){toast('На сегодня всё выучено');return}
+  again=[]; total=Q.length;
+  document.getElementById('stage').innerHTML=CARD_HTML;
+  document.getElementById('study').classList.add('on');
+  nextCard();
+}
+function nextCard(){
+  shown=false;
+  document.getElementById('gr').classList.add('hide');
+  document.getElementById('show').style.display='block';
+  if(!Q.length&&again.length){Q=again;again=[];total+=Q.length}
+  if(!Q.length) return finish();
+  cur=Q.shift();
+  var c=cur.c, s=st(c.id,cur.dir);
+  var front=cur.dir?c.b:c.f, back=cur.dir?c.f:c.b;
+  document.getElementById('stage').innerHTML=CARD_HTML;
+  document.getElementById('ftag').textContent=(cur.dir?(deck.backName||'ОТВЕТ'):(deck.frontName||'ВОПРОС'))+((s&&s.reps)?'':' · новая');
+  document.getElementById('fq').textContent=front;
+  document.getElementById('fh').textContent=cur.dir?'':(c.h||'');
+  document.getElementById('ba').textContent=back;
+  document.getElementById('bs').textContent=c.h||'';
+  var done=total-Q.length-1;
+  document.getElementById('pg').style.width=(done/total*100)+'%';
+  document.getElementById('cnt').textContent=(done+1)+' / '+total;
+  document.getElementById('tip').textContent=again.length?('на повтор в этой сессии: '+again.length):'';
+}
+function reveal(){
+  if(shown||!cur)return; shown=true;
+  document.getElementById('card').classList.add('flip');
+  document.getElementById('show').style.display='none';
+  document.getElementById('gr').classList.remove('hide');
+  for(var i=1;i<=4;i++) document.getElementById('i'+i).textContent=fmt(preview(cur.c.id,cur.dir,i));
+}
+function rate(g){
+  if(!shown)return;
+  var k=key(cur.c.id,cur.dir), t=today(), s=S.sched[k], isNew=!s||!s.reps;
+  var m=isNew?initM(g):nextM(s,g,Math.max(0,t-s.last));
+  S.sched[k]={s:m.s,d:m.d,last:t,due:t+ivl(m.s),reps:((s&&s.reps)||0)+1,lapses:((s&&s.lapses)||0)+(g===1?1:0)};
+  S.log.push({t:t,g:g,n:isNew?1:0,dk:deck.id});
+  if(S.log.length>5000)S.log=S.log.slice(-4000);
+  save();
+  if(g===1||(g===2&&Math.random()<.5)) again.push(cur);   // забыл — вернём в конец сессии
+  nextCard();
+}
+function finish(){
+  cur=null;
+  var n=S.log.filter(function(l){return l.t===today()}).length;
+  document.getElementById('stage').innerHTML='<div class="done"><div class="em">&#127881;</div><h2>Колода закрыта</h2>'+
+    '<p style="color:var(--dim)">Сегодня повторено: '+n+'.<br>Следующие придут, когда память начнёт проседать.</p>'+
+    '<button class="btn" style="margin-top:16px" onclick="endSession()">На главную</button></div>';
+  document.getElementById('show').style.display='none';
+  document.getElementById('gr').classList.add('hide');
+  document.getElementById('pg').style.width='100%';
+  document.getElementById('tip').textContent='';
+}
+function endSession(){
+  document.getElementById('study').classList.remove('on');
+  cur=null; Q=[]; again=[];
+  render();
+}
+document.addEventListener('keydown',function(e){
+  if(!document.getElementById('study').classList.contains('on'))return;
+  if(e.code==='Space'||e.code==='Enter'){e.preventDefault(); shown?rate(3):reveal(); return}
+  if(shown&&/^[1-4]$/.test(e.key))rate(+e.key);
+  if(e.key==='Escape')endSession();
+});
+
+/* ================= ГЛАВНАЯ ================= */
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function render(){
+  var t=today(), all=Object.keys(S.sched).map(function(k){return S.sched[k]});
+  var rev=S.log.filter(function(l){return l.t===t}).length;
+  var dueAll=all.filter(function(s){return s.due<=t}).length;
+  var lastRev=S.log.filter(function(x){return !x.n}).slice(-200);
+  var acc=lastRev.length?Math.round(lastRev.filter(function(x){return x.g>1}).length/lastRev.length*100):0;
+  document.getElementById('hs').innerHTML=
+    stat('&#128293;',streak(),'дней подряд')+stat('&#128197;',dueAll,'к повтору')+
+    stat('&#9989;',rev,'сегодня')+stat('&#129504;',acc+'%','удержание');
+  document.getElementById('dl').innerHTML=S.decks.map(function(d,i){
+    var c=counts(d), tot=d.cards.length*dirs(d).length, known=0;
+    d.cards.forEach(function(x){dirs(d).forEach(function(dir){var s=st(x.id,dir);if(s&&s.s>=21)known++})});
+    return '<div class="deck" style="animation-delay:'+(i*.05)+'s" onclick="study(\''+d.id+'\')">'+
+      '<div class="em">'+(d.emoji||'&#128218;')+'</div><h3>'+esc(d.name)+'</h3>'+
+      '<p>'+d.cards.length+' карточек'+(d.both?' &middot; обе стороны':'')+'</p>'+
+      '<div class="pills">'+(c.d?'<span class="pill d">'+c.d+' повтор</span>':'')+
+      (c.n?'<span class="pill n">'+c.n+' новых</span>':'')+
+      (!c.d&&!c.n?'<span class="pill">на сегодня всё</span>':'')+'</div>'+
+      '<div class="bar"><i style="width:'+(tot?known/tot*100:0)+'%"></i></div>'+
+      '<div style="position:absolute;top:14px;right:12px" onclick="event.stopPropagation()">'+
+      '<button class="icnbtn" style="width:30px;height:30px;font-size:13px" onclick="editDeck(\''+d.id+'\')">&#9998;</button></div></div>';
+  }).join('')+'<div class="add" onclick="editDeck()">+ новая колода</div>';
+}
+function stat(e,v,l){return '<div class="stat"><b>'+e+' '+v+'</b><i>'+l+'</i></div>'}
+function streak(){
+  var days={}; S.log.forEach(function(l){days[l.t]=1});
+  var d=today(); if(!days[d])d--;
+  var n=0; while(days[d]){n++;d--}
+  return n;
+}
+
+/* ================= РЕДАКТОР ================= */
+function editDeck(id){
+  var d=id?S.decks.filter(function(x){return x.id===id})[0]:{id:uid(),name:'',emoji:'&#128218;',both:true,cards:[]};
+  var txt=d.cards.map(function(c){return c.f+' | '+c.b+(c.h?' | '+c.h:'')}).join('\n');
+  var ph='ubiquitous | вездесущий | smartphones are ubiquitous\n1861 | отмена крепостного права\nСт. 51 Конституции РФ | право не свидетельствовать против себя';
+  open$('<h2>'+(id?'Колода':'Новая колода')+'</h2><p class="h">Формат строки: <b>вопрос | ответ | подсказка</b></p>'+
+   '<div style="display:flex;gap:10px"><div style="width:80px"><label>Иконка</label><input id="e" value="'+esc(d.emoji||'')+'"></div>'+
+   '<div style="flex:1"><label>Название</label><input id="n" value="'+esc(d.name)+'" placeholder="Английский B1+ / Право РФ / История"></div></div>'+
+   '<div style="display:flex;gap:10px"><div style="flex:1"><label>Подпись лица</label><input id="fn" value="'+esc(d.frontName||'ВОПРОС')+'"></div>'+
+   '<div style="flex:1"><label>Подпись оборота</label><input id="bn" value="'+esc(d.backName||'ОТВЕТ')+'"></div></div>'+
+   '<label>Карточки</label><textarea id="t" placeholder="'+esc(ph)+'">'+esc(txt)+'</textarea>'+
+   '<label class="chk"><input type="checkbox" id="b"'+(d.both?' checked':'')+'> Учить в обе стороны (два независимых следа памяти)</label>'+
+   '<div class="row"><button class="btn" onclick="saveDeck(\''+d.id+'\')">Сохранить</button>'+
+   (id?'<button class="btn gh" onclick="delDeck(\''+d.id+'\')">Удалить</button>':'')+
+   '<button class="btn gh" onclick="closeM()">Отмена</button></div>');
+}
+function v(i){return document.getElementById(i).value.trim()}
+function saveDeck(id){
+  var d=S.decks.filter(function(x){return x.id===id})[0];
+  if(!d){d={id:id,cards:[]};S.decks.push(d)}
+  d.name=v('n')||'Без названия'; d.emoji=v('e')||'&#128218;';
+  d.both=document.getElementById('b').checked;
+  d.frontName=v('fn'); d.backName=v('bn');
+  var old={}; d.cards.forEach(function(c){old[c.f+' '+c.b]=c});   // сохраняем прогресс по совпадению текста
+  d.cards=v('t').split('\n').map(function(l){return l.trim()}).filter(Boolean).map(function(l){
+    var p=l.split('|').map(function(x){return (x||'').trim()});
+    if(!p[1])return null;
+    var ex=old[p[0]+' '+p[1]];
+    if(ex){ex.h=p[2]||'';return ex}
+    return {id:uid(),f:p[0],b:p[1],h:p[2]||''};
+  }).filter(Boolean);
+  save();closeM();render();
+}
+function delDeck(id){
+  if(!confirm('Удалить колоду вместе с прогрессом?'))return;
+  var d=S.decks.filter(function(x){return x.id===id})[0];
+  d.cards.forEach(function(c){delete S.sched[key(c.id,0)];delete S.sched[key(c.id,1)]});
+  S.decks=S.decks.filter(function(x){return x.id!==id});
+  save();closeM();render();
+}
+
+/* ================= СТАТИСТИКА / БЭКАП ================= */
+function statsModal(){
+  var t=today(), f={}, ks=Object.keys(S.sched);
+  ks.forEach(function(k){var s=S.sched[k];var i=Math.max(0,s.due-t);if(i<30)f[i]=(f[i]||0)+1});
+  var days=[],mx=1,i;
+  for(i=0;i<30;i++){days.push(f[i]||0);mx=Math.max(mx,f[i]||0)}
+  var hist=[],hm=1;
+  for(i=0;i<70;i++){var n=S.log.filter(function(l){return l.t===t-69+i}).length;hist.push(n);hm=Math.max(hm,n)}
+  var avg=ks.length?(ks.reduce(function(a,k){return a+S.sched[k].s},0)/ks.length).toFixed(1):'0';
+  open$('<h2>Статистика</h2><p class="h">Нагрузка на 30 дней вперёд &middot; активность за 10 недель</p>'+
+   '<div style="display:flex;align-items:flex-end;gap:3px;height:110px;margin-top:14px">'+
+   days.map(function(n,i){return '<div title="через '+i+' дн: '+n+'" style="flex:1;height:'+(n/mx*100)+'%;min-height:2px;border-radius:3px 3px 0 0;background:linear-gradient(180deg,var(--acc),var(--acc2))"></div>'}).join('')+'</div>'+
+   '<div class="heat">'+hist.map(function(n){return '<div class="hc" title="'+n+'" style="background:'+(n?'rgba(124,92,255,'+(.25+.75*n/hm)+')':'rgba(255,255,255,.06)')+'"></div>'}).join('')+'</div>'+
+   '<table><tr><th>Показатель</th><th>Значение</th></tr>'+
+   '<tr><td>Следов памяти</td><td>'+ks.length+'</td></tr>'+
+   '<tr><td>Выучено (интервал &ge; 21 дн)</td><td>'+ks.filter(function(k){return S.sched[k].s>=21}).length+'</td></tr>'+
+   '<tr><td>Проблемные (&ge;3 забывания)</td><td>'+ks.filter(function(k){return S.sched[k].lapses>=3}).length+'</td></tr>'+
+   '<tr><td>Средняя стабильность</td><td>'+avg+' дн</td></tr></table>'+
+   '<label>Новых карточек в день</label><input id="np" type="number" value="'+S.cfg.newPerDay+'">'+
+   '<label>Целевое удержание 0.8–0.97 (выше = чаще повторы)</label><input id="rt" type="number" step="0.01" value="'+S.cfg.retention+'">'+
+   '<div class="row"><button class="btn" onclick="saveCfg()">Сохранить</button></div>');
+}
+function saveCfg(){
+  S.cfg.newPerDay=Math.max(0,+v('np')||15);
+  S.cfg.retention=Math.min(.97,Math.max(.8,+v('rt')||.9));
+  save();closeM();render();
+}
+function backupModal(){
+  open$('<h2>Бэкап</h2><p class="h">Прогресс лежит в этом браузере. Файл — чтобы перенести на другое устройство.</p>'+
+   '<div class="row"><button class="btn" onclick="exp()">Скачать JSON</button>'+
+   '<button class="btn gh" onclick="document.getElementById(\'imp\').click()">Загрузить JSON</button></div>'+
+   '<input id="imp" type="file" accept=".json" style="display:none" onchange="imp(this)">');
+}
+function exp(){
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([JSON.stringify(S)],{type:'application/json'}));
+  a.download='huyanki-'+new Date().toISOString().slice(0,10)+'.json';a.click();
+}
+function imp(el){
+  var r=new FileReader();
+  r.onload=function(){try{S=Object.assign(JSON.parse(JSON.stringify(DEF)),JSON.parse(r.result));save();closeM();render();toast('Загружено')}catch(e){alert('Битый файл')}};
+  r.readAsText(el.files[0]);
+}
+function open$(h){document.getElementById('sheet').innerHTML=h;document.getElementById('modal').classList.add('on')}
+function closeM(){document.getElementById('modal').classList.remove('on')}
+function go(){closeM();endSession()}
+function toast(m){
+  var d=document.createElement('div');d.textContent=m;
+  d.style.cssText='position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:var(--bg2);border:1px solid var(--line);padding:12px 20px;border-radius:14px;z-index:99;animation:up .3s';
+  document.body.appendChild(d);setTimeout(function(){d.remove()},2200);
+}
+
+/* стартовые колоды — правь карандашом на карточке колоды */
+if(!S.decks.length){
+  var mk=function(name,emoji,fn,bn,rows){return{id:uid(),name:name,emoji:emoji,both:true,frontName:fn,backName:bn,
+    cards:rows.map(function(r){return{id:uid(),f:r[0],b:r[1],h:r[2]||''}})}};
+  S.decks=[
+    mk('Английский B1+ → C1','🇬🇧','WORD','ПЕРЕВОД',[
+      ['ubiquitous','вездесущий, повсеместный','smartphones are ubiquitous'],
+      ['to acknowledge','признавать, подтверждать','acknowledge a mistake'],
+      ['compelling','убедительный, захватывающий','a compelling argument'],
+      ['to undermine','подрывать, ослаблять','undermine confidence'],
+      ['scarce','скудный, дефицитный','water is scarce here'],
+      ['to comply with','соблюдать, выполнять','comply with the rules']]),
+    mk('Право РФ','⚖️','НОРМА','СОДЕРЖАНИЕ',[
+      ['Ст. 51 Конституции РФ','Право не свидетельствовать против себя и близких',''],
+      ['Ст. 2 Конституции РФ','Человек, его права и свободы — высшая ценность',''],
+      ['Полная дееспособность','С 18 лет; эмансипация — с 16','ст. 21, 27 ГК РФ'],
+      ['Общий срок исковой давности','3 года','ст. 196 ГК РФ']]),
+    mk('История России','🏛️','ДАТА','СОБЫТИЕ',[
+      ['1547','Венчание Ивана IV на царство',''],
+      ['1613','Земский собор, начало династии Романовых',''],
+      ['1861','Отмена крепостного права',''],
+      ['1905','Первая русская революция, Манифест 17 октября',''],
+      ['1918','Первая Конституция РСФСР','']])];
+  save();
+}
+render();
+</script>
+</body>
+</html>
