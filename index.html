@@ -58,14 +58,15 @@ header{display:flex;align-items:center;gap:12px;padding:6px 2px 22px}
 .prog{flex:1;height:6px;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden}
 .prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acc),var(--acc2));transition:width .5s}
 .cnt{font-size:12px;color:var(--dim);font-variant-numeric:tabular-nums;font-weight:600}
-.stage{flex:1;display:grid;place-items:center;padding:10px 18px;perspective:1600px}
-.card{width:100%;max-width:640px;min-height:min(48vh,380px);position:relative;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,0,.2,1);cursor:pointer}
-.card.flip{transform:rotateY(180deg)}
-.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:26px;padding:34px;
+.stage{flex:1;display:grid;place-items:center;padding:10px 18px;perspective:1600px;min-height:0}
+/* без 3D-переворота: содержимое подменяется на середине анимации — никаких зеркальных backface */
+.card{width:100%;max-width:640px;cursor:pointer;transition:transform .17s ease-in,opacity .17s ease-in}
+.card.half{transform:rotateY(88deg);opacity:.25}
+.face{border-radius:26px;padding:clamp(20px,4vw,34px);min-height:min(46vh,360px);max-height:76vh;overflow-y:auto;
   display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;
   background:linear-gradient(160deg,rgba(255,255,255,.075),rgba(255,255,255,.03));border:1px solid var(--line);
-  box-shadow:0 30px 70px -30px rgba(0,0,0,.9)}
-.face.b{transform:rotateY(180deg);background:linear-gradient(160deg,rgba(124,92,255,.16),rgba(192,76,255,.07))}
+  box-shadow:0 30px 70px -30px rgba(0,0,0,.9);transition:background .3s}
+.face.ans{background:linear-gradient(160deg,rgba(124,92,255,.16),rgba(192,76,255,.07))}
 .face .tag{font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);font-weight:700}
 .face .txt{font-size:clamp(22px,4.6vw,36px);font-weight:750;letter-spacing:-.8px;line-height:1.25}
 .face .sub{font-size:14.5px;color:var(--dim);max-width:44ch;line-height:1.5}
@@ -229,8 +230,7 @@ function counts(deck){
 /* ================= СЕССИЯ ================= */
 var Q=[],cur=null,deck=null,total=0,shown=false,again=[];
 var CARD_HTML='<div class="card" id="card" onclick="reveal()">'+
- '<div class="face f"><div class="tag" id="ftag"></div><div class="txt" id="fq"></div><div class="sub" id="fh"></div></div>'+
- '<div class="face b"><div class="tag">ОТВЕТ</div><div class="txt" id="ba"></div><div class="sub" id="bs"></div></div></div>';
+ '<div class="face" id="face"><div class="tag" id="ftag"></div><div class="txt" id="fq"></div><div class="sub" id="fh"></div></div></div>';
 function study(id){
   deck=S.decks.filter(function(d){return d.id===id})[0];
   Q=queue(deck);
@@ -248,14 +248,12 @@ function nextCard(){
   if(!Q.length) return finish();
   cur=Q.shift();
   var c=cur.c, s=st(c.id,cur.dir);
-  var front=cur.dir?c.b:c.f, back=cur.dir?c.f:c.b;
+  var front=cur.dir?c.b:c.f;
   document.getElementById('stage').innerHTML=CARD_HTML;
   document.getElementById('ftag').textContent=(cur.dir?(deck.backName||'ОТВЕТ'):(deck.frontName||'ВОПРОС'))+((s&&s.reps)?'':' · новая');
   document.getElementById('fq').textContent=front;
   document.getElementById('fh').textContent=cur.dir?'':(c.h||'');
-  document.getElementById('ba').textContent=back;
-  document.getElementById('bs').textContent=c.h||'';
-  fit('fq',front); fit('ba',back);
+  fit('fq',front);
   var done=total-Q.length-1;
   document.getElementById('pg').style.width=(done/total*100)+'%';
   document.getElementById('cnt').textContent=(done+1)+' / '+total;
@@ -268,7 +266,16 @@ function fit(id,t){
 }
 function reveal(){
   if(shown||!cur)return; shown=true;
-  document.getElementById('card').classList.add('flip');
+  var c=cur.c, back=cur.dir?c.f:c.b, card=document.getElementById('card');
+  card.classList.add('half');
+  setTimeout(function(){
+    document.getElementById('ftag').textContent=cur.dir?(deck.frontName||'ВОПРОС'):(deck.backName||'ОТВЕТ');
+    document.getElementById('fq').textContent=back;
+    document.getElementById('fh').textContent=c.h||'';
+    document.getElementById('face').classList.add('ans');
+    fit('fq',back);
+    card.classList.remove('half');
+  },170);
   document.getElementById('show').style.display='none';
   document.getElementById('gr').classList.remove('hide');
   for(var i=1;i<=4;i++) document.getElementById('i'+i).textContent=fmt(preview(cur.c.id,cur.dir,i));
