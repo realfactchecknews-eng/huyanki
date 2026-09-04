@@ -3,18 +3,32 @@
   "file": "english-c1.json",
   "name": "Английский B1+ → C1",
   "emoji": "🇬🇧",
-  "n": 157
+  "n": 219,
+  "both": true,
+  "ver": 2
  },
  {
   "file": "law-rf.json",
   "name": "Право РФ",
   "emoji": "⚖️",
-  "n": 116
+  "n": 153,
+  "both": false,
+  "ver": 2
+ },
+ {
+  "file": "soc.json",
+  "name": "Обществознание",
+  "emoji": "🌐",
+  "n": 139,
+  "both": false,
+  "ver": 1
  },
  {
   "file": "ww2.json",
   "name": "Вторая мировая война",
   "emoji": "🎖️",
-  "n": 119
+  "n": 119,
+  "both": true,
+  "ver": 1
  }
 ]

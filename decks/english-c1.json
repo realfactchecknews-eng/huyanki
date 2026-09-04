@@ -789,6 +789,317 @@
 "f": "at odds with",
 "b": "в противоречии с",
 "h": "at odds with the evidence"
+},
+{
+"f": "to account for",
+"b": "объяснять; составлять (долю)",
+"h": "this accounts for 30% of sales"
+},
+{
+"f": "to adhere to",
+"b": "придерживаться, соблюдать",
+"h": "adhere to the principles"
+},
+{
+"f": "adamant",
+"b": "непреклонный",
+"h": "she was adamant about leaving"
+},
+{
+"f": "to allocate",
+"b": "распределять, выделять",
+"h": "allocate resources"
+},
+{
+"f": "to be at stake",
+"b": "быть на кону, под угрозой",
+"h": "thousands of jobs are at stake"
+},
+{
+"f": "to backfire",
+"b": "привести к обратному результату",
+"h": "the plan backfired"
+},
+{
+"f": "to be conducive",
+"b": "благоприятствовать",
+"h": "conducive to growth"
+},
+{
+"f": "to boil down to",
+"b": "сводиться к",
+"h": "it boils down to money"
+},
+{
+"f": "to brush up on",
+"b": "освежить (знания)",
+"h": "brush up on your English"
+},
+{
+"f": "to call for",
+"b": "требовать, призывать к",
+"h": "the situation calls for action"
+},
+{
+"f": "to carry out",
+"b": "проводить, осуществлять",
+"h": "carry out an experiment"
+},
+{
+"f": "cautious",
+"b": "осторожный, осмотрительный",
+"h": "a cautious approach"
+},
+{
+"f": "to come up with",
+"b": "придумать, предложить",
+"h": "come up with a solution"
+},
+{
+"f": "to cope with",
+"b": "справляться с",
+"h": "cope with stress"
+},
+{
+"f": "to cut back on",
+"b": "сокращать (расходы)",
+"h": "cut back on spending"
+},
+{
+"f": "daunting",
+"b": "пугающий, обескураживающий",
+"h": "a daunting task"
+},
+{
+"f": "to deal with",
+"b": "иметь дело с, решать",
+"h": "deal with a complaint"
+},
+{
+"f": "deliberate",
+"b": "намеренный; неспешный",
+"h": "a deliberate attempt"
+},
+{
+"f": "to draw on",
+"b": "опираться на, использовать",
+"h": "draw on experience"
+},
+{
+"f": "to dwell on",
+"b": "зацикливаться на",
+"h": "don't dwell on the past"
+},
+{
+"f": "elaborate",
+"b": "подробный, продуманный; разъяснять",
+"h": "an elaborate plan / could you elaborate?"
+},
+{
+"f": "to figure out",
+"b": "разобраться, вычислить",
+"h": "figure out how it works"
+},
+{
+"f": "to fall short of",
+"b": "не дотягивать до",
+"h": "fell short of expectations"
+},
+{
+"f": "to give rise to",
+"b": "порождать, вызывать",
+"h": "give rise to concerns"
+},
+{
+"f": "to grapple with",
+"b": "биться над, бороться с",
+"h": "grapple with a problem"
+},
+{
+"f": "gruelling",
+"b": "изнурительный",
+"h": "a gruelling schedule"
+},
+{
+"f": "to hold accountable",
+"b": "привлекать к ответственности",
+"h": "hold officials accountable"
+},
+{
+"f": "to keep track of",
+"b": "отслеживать",
+"h": "keep track of expenses"
+},
+{
+"f": "to lay off",
+"b": "увольнять (по сокращению)",
+"h": "500 workers were laid off"
+},
+{
+"f": "to live up to",
+"b": "оправдывать (ожидания)",
+"h": "live up to the hype"
+},
+{
+"f": "to look into",
+"b": "изучать, расследовать",
+"h": "police are looking into it"
+},
+{
+"f": "to make up for",
+"b": "компенсировать, наверстать",
+"h": "make up for lost time"
+},
+{
+"f": "to narrow down",
+"b": "сузить (круг вариантов)",
+"h": "narrow down the options"
+},
+{
+"f": "to opt for",
+"b": "выбирать, отдавать предпочтение",
+"h": "opt for the cheaper option"
+},
+{
+"f": "to pave the way for",
+"b": "проложить путь к",
+"h": "pave the way for reform"
+},
+{
+"f": "painstaking",
+"b": "кропотливый",
+"h": "painstaking research"
+},
+{
+"f": "to phase out",
+"b": "постепенно сворачивать",
+"h": "phase out the old system"
+},
+{
+"f": "to point out",
+"b": "указывать, отмечать",
+"h": "point out a mistake"
+},
+{
+"f": "to put forward",
+"b": "выдвигать (идею)",
+"h": "put forward a proposal"
+},
+{
+"f": "to rule out",
+"b": "исключать (вариант)",
+"h": "we can't rule out that option"
+},
+{
+"f": "to run into",
+"b": "столкнуться с (проблемой)",
+"h": "run into difficulties"
+},
+{
+"f": "to set out",
+"b": "излагать; отправляться",
+"h": "the report sets out the findings"
+},
+{
+"f": "to shed light on",
+"b": "пролить свет на",
+"h": "shed light on the causes"
+},
+{
+"f": "to single out",
+"b": "выделять, выбирать одного",
+"h": "singled out for praise"
+},
+{
+"f": "to sort out",
+"b": "уладить, разобраться",
+"h": "sort out the details"
+},
+{
+"f": "to stand out",
+"b": "выделяться",
+"h": "stand out from the crowd"
+},
+{
+"f": "to step down",
+"b": "уйти в отставку",
+"h": "he stepped down as CEO"
+},
+{
+"f": "to take into account",
+"b": "принимать во внимание",
+"h": "take the costs into account"
+},
+{
+"f": "to take its toll",
+"b": "сказаться, нанести урон",
+"h": "stress takes its toll"
+},
+{
+"f": "to touch on",
+"b": "затрагивать (тему)",
+"h": "touch on a sensitive issue"
+},
+{
+"f": "to turn out",
+"b": "оказаться",
+"h": "it turned out to be false"
+},
+{
+"f": "to weed out",
+"b": "отсеять, избавиться от",
+"h": "weed out weak candidates"
+},
+{
+"f": "staggering",
+"b": "ошеломляющий (о цифрах)",
+"h": "a staggering increase"
+},
+{
+"f": "to underpin",
+"b": "лежать в основе, подкреплять",
+"h": "the data underpin the theory"
+},
+{
+"f": "to warrant",
+"b": "оправдывать, требовать",
+"h": "this warrants further study"
+},
+{
+"f": "wary of",
+"b": "настороженный, опасающийся",
+"h": "wary of strangers"
+},
+{
+"f": "to weather (a crisis)",
+"b": "пережить, выдержать",
+"h": "weather the storm"
+},
+{
+"f": "willingness",
+"b": "готовность (что-то делать)",
+"h": "willingness to compromise"
+},
+{
+"f": "to zero in on",
+"b": "сфокусироваться на",
+"h": "zero in on the key issue"
+},
+{
+"f": "in light of",
+"b": "в свете, учитывая",
+"h": "in light of recent events"
+},
+{
+"f": "with a view to",
+"b": "с целью",
+"h": "with a view to expanding"
+},
+{
+"f": "on the grounds that",
+"b": "на том основании, что",
+"h": "rejected on the grounds that it was late"
 }
-]
+],
+"ver": 2
 }
